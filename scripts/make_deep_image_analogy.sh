@@ -2,7 +2,7 @@
 
 source=deep_image_analogy/source
 
-nvcc $source/*.cpp $source/*.cu -o deep_image_analogy \
+nvcc $source/*.cpp $source/*.cu -o deep_image_analogy_exe \
 	-std=c++11 \
         -I/opt/anaconda3/include/eigen3 \
         -I/opt/anaconda3/include \
