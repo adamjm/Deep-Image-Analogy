@@ -4,10 +4,9 @@
 
 #include "Combo.cuh"
 #include "Classifier.h"
-#include <Windows.h>
 #include <direct.h>
 
-#define MAX_LEN 1024
+#define MAX_LEN 4096
 
 int ComputeCombo(int argc, char** argv)
 {
