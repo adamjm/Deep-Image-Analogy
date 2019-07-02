@@ -40,8 +40,8 @@ int ComputeCombo(int argc, char** argv)
 	string outputDir_flow = rootDir + "\\flow\\";
 	string outputDir_combo = rootDir + "\\combo_new\\";
 
-	CreateDirectoryA(outputDir_flow.c_str(), NULL);
-	CreateDirectoryA(outputDir_combo.c_str(), NULL);
+	mkdir(outputDir_flow.c_str(), 0755);
+	mkdir(outputDir_combo.c_str(), 0755);
 
 	string model_file = "\\vgg_19_gray_bn\\deploy.prototxt";
 	string trained_file = "\\vgg_19_gray_bn\\vgg19_bn_gray_ft_iter_150000.caffemodel";
