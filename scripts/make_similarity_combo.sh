@@ -2,7 +2,7 @@
 
 source=similarity_combo/source
 
-nvcc $source/*.cpp $source/*.cu -o demo \
+nvcc $source/*.cpp $source/*.cu -o similarity_combo \
 	-std=c++11 \
         -I/opt/anaconda3/include/eigen3 \
         -I/opt/anaconda3/include \
