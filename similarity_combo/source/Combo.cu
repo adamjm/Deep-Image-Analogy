@@ -6,6 +6,7 @@
 #include "caffe/common.hpp"
 #include "GeneralizedPatchMatch.cuh"
 #include "Combo.cuh"
+#include "opencv2/imgcodecs.hpp"
 
 #define ENABLE_VIS 0
 

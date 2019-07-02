@@ -4,6 +4,7 @@
 #include "DeepAnalogy.cuh"
 #include "WLS.h"
 #include "Deconv.h"
+#include "opencv2/imgcodecs.hpp"
 
 struct Parameters
 {
