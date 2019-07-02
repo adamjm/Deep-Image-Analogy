@@ -10,6 +10,12 @@
 
 #define ENABLE_VIS 0
 
+namespace cv
+{
+    using std::vector;
+}
+
+
 struct Parameters
 {
 	std::vector<std::string> layers; //which layers used as content

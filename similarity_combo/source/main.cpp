@@ -4,7 +4,9 @@
 
 #include "Combo.cuh"
 #include "Classifier.h"
-#include <direct.h>
+#include <sstream>
+#include <sys/stat.h>
+
 
 #define MAX_LEN 4096
 
@@ -81,17 +83,18 @@ int ComputeCombo(int argc, char** argv)
 		char ffileName1[260];
 
 		// detect if combo exists
-		sprintf(fileName0, "%s\\%s_%s.combo", outputDir_combo.c_str(), name_A.c_str(), name_B.c_str());
-		DWORD dwAttrib0 = GetFileAttributes(fileName0);
+                sprintf(fileName0, "%s\\%s_%s.combo", outputDir_combo.c_str(), name_A.c_str(), name_B.c_str());
+                unsigned int dwAttrib0 = access( ffileName0, F_OK );
 
-		sprintf(fileName1, "%s\\%s_%s.combo", outputDir_combo.c_str(), name_B.c_str(), name_A.c_str());
-		DWORD dwAttrib1 = GetFileAttributes(fileName1);
+                sprintf(fileName1, "%s\\%s_%s.combo", outputDir_combo.c_str(), name_B.c_str(), name_A.c_str());
+                unsigned int dwAttrib1 = access( ffileName1, F_OK );
 
-		if (dwAttrib0 != INVALID_FILE_ATTRIBUTES && dwAttrib1 != INVALID_FILE_ATTRIBUTES)
-		{
-			printf("Info: Combo %s and %s exist.\n", fileName0, fileName1);
-			continue;
-		}
+                if (dwAttrib0 != -1 && dwAttrib1 != -1)
+                {
+                        printf("Info: Combo %s and %s exist.\n", fileName0, fileName1);
+                        continue;
+                }
+
 
 		// load images
 		bool isOKA = dp.LoadA(A.c_str());
@@ -124,24 +127,25 @@ int ComputeCombo(int argc, char** argv)
 			continue;
 		}
 
-		// first detect if flow exits
-		sprintf(ffileName0, "%s\\%s_%s.txt", outputDir_flow.c_str(), name_A.c_str(), name_B.c_str());
-		dwAttrib0 = GetFileAttributes(ffileName0);
+ 		// first detect if flow exits
+                sprintf(ffileName0, "%s\\%s_%s.txt", outputDir_flow.c_str(), name_A.c_str(), name_B.c_str());
+                dwAttrib0 = access( ffileName0, F_OK );
 
-		sprintf(ffileName1, "%s\\%s_%s.txt", outputDir_flow.c_str(), name_B.c_str(), name_A.c_str());
-		dwAttrib1 = GetFileAttributes(ffileName1);
+                sprintf(ffileName1, "%s\\%s_%s.txt", outputDir_flow.c_str(), name_B.c_str(), name_A.c_str());
+                dwAttrib1 = access( ffileName1, F_OK );
 
-		if (dwAttrib0 == INVALID_FILE_ATTRIBUTES)
-		{
-			printf("Error: Flow %s does not exist!\n", ffileName0);
-			continue;
-		}
+                if (dwAttrib0 == -1)
+                {
+                        printf("Error: Flow %s does not exist!\n", ffileName0);
+                        continue;
+                }
 
-		if (dwAttrib1 == INVALID_FILE_ATTRIBUTES)
-		{
-			printf("Error: Flow %s does not exist!\n", ffileName1);
-			continue;
-		}
+                if (dwAttrib1 == -1)
+                {
+                        printf("Error: Flow %s does not exist!\n", ffileName1);
+                        continue;
+                }
+
 
 		// detect if flow is valid
 		printf("Info: Flows exist.\n", i);
